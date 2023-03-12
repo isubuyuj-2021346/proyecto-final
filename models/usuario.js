@@ -14,22 +14,20 @@ const UsuarioSchema = Schema({
         type: String,
         required: [true, 'El contraseña es obligatorio']
     },
-    img: {
-        type: String
-    },
     rol: {
         type: String,
         required: true,
-        //emun: ['ADMIN_ROLE', 'USER_ROLE']
+        default: 'CLIENT'
     },
     estado: {
         type: Boolean,
         default: true
     },
-    google: {
-        type: Boolean,
-        default: false
-    }
+    compras: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Factura',
+        required: true
+    }]
 });
 
 module.exports = model('Usuario', UsuarioSchema)

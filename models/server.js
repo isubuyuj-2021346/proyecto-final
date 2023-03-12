@@ -10,15 +10,17 @@ class Server {
         //Variables de configuración
         this.app = express();
         this.port = process.env.PORT;
-
-    	// this.authPath = '/api/auth';
         // this.usuarioPath = '/api/usuarios';
-        // this.categoriaPath = '/api/categorias';
+        // this.authPath = '/api/auth';
 
         this.paths = {
             auth: '/api/auth',
             usuario: '/api/usuarios',
-            categoria: '/api/categorias'
+            categoria: '/api/categorias',
+            productos: '/api/productos',
+            carritos: '/api/carritos',
+            facturas: '/api/facturas',
+            buscar: '/api/buscar',
         }
 
         //Conectar a base de datos
@@ -54,9 +56,13 @@ class Server {
 
 
     routes(){
-        this.app.use( this.paths.auth , require('../routes/auth') );
+        this.app.use( this.paths.auth , require('../routes/auth'));
         this.app.use( this.paths.categoria, require('../routes/categoria'));
-        this.app.use( this.paths.usuario , require('../routes/usuario') );
+        this.app.use(this.paths.productos, require('../routes/producto'));
+        this.app.use( this.paths.usuario, require('../routes/usuario'));
+        this.app.use(this.paths.carritos, require('../routes/carrito'));
+        this.app.use( this.paths.facturas, require('../routes/factura'));
+        this.app.use(this.paths.buscar, require('../routes/buscar'));
     }
 
 
@@ -68,7 +74,6 @@ class Server {
 
 
 }
-
 
 
 module.exports = Server;
